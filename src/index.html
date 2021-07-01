@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端监控SDK</title>
+</head>
+<body>
+    <div id="container">
+        <div class="content">
+            <button onclick="errorClick()">点击抛出错误</button>
+            <button onclick="promiseErrorClick()">点击抛出promise错误</button>
+            <button onclick="sendSuccess()">ajax成功请求</button>
+            <button onclick="sendError()">ajax失败请求</button>
+        </div>
+        <div class="main" style="width: 1000px;word-wrap: break-word;"></div>
+    </div>
+    <div class="footer">
+        <div class="main" style="width: 1000px;word-wrap: break-word;"></div>
+    </div>
+</body>
+</html>
+<script src="../dykt-monitor/dist/monitor.js"></script>
+<script>
+    let main = document.querySelector('.main')
+    main.innerHTML = '@'.repeat(10000)
+    function errorClick() {
+        window.someVar.error = 'error'
+    }
+    function promiseErrorClick() {
+        new Promise((res, rej) => {
+            window.someVar.error = 'error'
+        })
+    }
+    function sendSuccess() {
+        let xhr = new XMLHttpRequest;
+        xhr.open('GET', '/success', true);
+        xhr.responseType = 'json';
+        xhr.onload = function () {
+            console.log(xhr.response)
+        }
+        xhr.send()
+    }
+    function sendError() {
+        let xhr = new XMLHttpRequest;
+        xhr.open('POST', '/error', true);
+        xhr.responseType = 'json';
+        xhr.onload = function () {
+            console.log(xhr.response)
+        }
+        xhr.onerror = function (error) {
+            console.log(error)
+        }
+        xhr.send('name=dykt')
+    }
+    let content = document.querySelector('.content')
+    let h1 = document.createElement('h1')
+    h1.innerHTML = '我是这个页面最有意义的内容'
+    h1.setAttribute('elementtiming', 'meaningful') // 属性是定死的
+    content.appendChild(h1)
+</script>

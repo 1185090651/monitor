@@ -1,0 +1,28 @@
+{
+  "name": "@dykt/monitor",
+  "version": "1.3.0",
+  "description": "前端监控报警",
+  "main": "./dist/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./dist/temp.js -o ./dist/index.js --presets @babel/preset-env"
+  },
+  "keywords": [],
+  "author": "liuming",
+  "license": "ISC",
+  "dependencies": {
+    "google-protobuf": "^3.14.0",
+    "user-agent": "^1.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/dykt/dykt-monitor/tree/master/dykt-monitor"
+  }
+}
